@@ -1,0 +1,22 @@
+[project]
+name = "ipv6-roamer"
+version = "0.1.0"
+description = "Managing roaming static IPv6 addresses across multiple saved NetworkManager profiles"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pydantic>=2.13.4",
+    "pygobject>=3.56.3",
+    "pygobject-stubs>=2.17.0",
+]
+
+[project.scripts]
+ipv6-roamer = "ipv6_roamer.__main__:main"
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+ignore = ["E402"]
+
