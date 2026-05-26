@@ -78,11 +78,13 @@ class IPv6RoamerWindow(Adw.ApplicationWindow):
         
         # Clear existing group children before rendering
         # (This is needed when reloading)
-        while True:
-            child = self.group.get_first_child()
-            if not child:
-                break
-            self.group.remove(child)
+        if hasattr(self, 'profile_rows'):
+            for row in self.profile_rows:
+                self.group.remove(row)
+        self.profile_rows = []
+        if self.show_more_row:
+            self.group.remove(self.show_more_row)
+            self.show_more_row = None
 
         self.current_loaded_idx = 0
         self._render_batch()
@@ -116,6 +118,9 @@ class IPv6RoamerWindow(Adw.ApplicationWindow):
             row.add_suffix(btn)
             
             self.group.add(row)
+            if not hasattr(self, 'profile_rows'):
+                self.profile_rows = []
+            self.profile_rows.append(row)
             
         self.current_loaded_idx += len(batch)
         
